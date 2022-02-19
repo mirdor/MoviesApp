@@ -2,10 +2,11 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import DetailsScreen from '../screens/DetailsScreen';
+import { Movie } from '../interfaces/movieInterface';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
-  DetailsScreen: undefined;
+  DetailsScreen: Movie;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

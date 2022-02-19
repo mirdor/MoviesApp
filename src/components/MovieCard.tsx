@@ -1,7 +1,9 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Movie } from '../interfaces/movieInterface';
+import { RootStackParamList } from '../navigation/Navigation';
 
 interface Props {
   movie: Movie;
@@ -9,11 +11,17 @@ interface Props {
   width?: number;
 }
 
+type ScreenRouteProp = NavigationProp<RootStackParamList, 'DetailsScreen'>;
+
 const MovieCard = ({ movie, height = 360, width = 250 }: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
+  const navigation = useNavigation<ScreenRouteProp>();
+
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DetailsScreen', movie)}
+      activeOpacity={0.8}
       style={{
         width,
         height,
@@ -22,7 +30,7 @@ const MovieCard = ({ movie, height = 360, width = 250 }: Props) => {
       <View style={styles.imageContainer}>
         <Image source={{ uri }} style={styles.image} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -42,7 +50,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
 
-    elevation: 15,
+    elevation: 10,
     borderRadius: 20,
   },
 });

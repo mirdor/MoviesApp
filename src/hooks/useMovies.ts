@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moviesAPI from '../api/movies';
 import { Movie, MoviesResponse } from '../interfaces/movieInterface';
 
@@ -24,21 +24,25 @@ const useMovies = () => {
     const topRatedPromise = moviesAPI.get<MoviesResponse>('/top_rated');
     const upcomingPromise = moviesAPI.get<MoviesResponse>('/upcoming');
 
-    const res = await Promise.all([
-      nowPlayingPromise,
-      popularPromise,
-      topRatedPromise,
-      upcomingPromise,
-    ]);
+    try {
+      const res = await Promise.all([
+        nowPlayingPromise,
+        popularPromise,
+        topRatedPromise,
+        upcomingPromise,
+      ]);
 
-    setMoviesState({
-      nowPlaying: res[0].data.results,
-      popular: res[1].data.results,
-      topRated: res[2].data.results,
-      upcoming: res[3].data.results,
-    });
+      setMoviesState({
+        nowPlaying: res[0].data.results,
+        popular: res[1].data.results,
+        topRated: res[2].data.results,
+        upcoming: res[3].data.results,
+      });
 
-    setIsLoading(false);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

@@ -6,6 +6,9 @@ const moviesAPI = axios.create({
     api_key: '5913e87ce22016bd0d223d3036d4217c',
     language: 'en-US',
   },
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export default moviesAPI;

@@ -9,7 +9,7 @@ import Carousel from 'react-native-snap-carousel';
 import HorizontalSlider from '../components/HorizontalSlider';
 
 const HomeScreen = () => {
-  const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
+  const { popular, nowPlaying, upcoming, topRated, isLoading } = useMovies();
 
   const { top } = useSafeAreaInsets();
   const { width } = useWindowDimensions();
